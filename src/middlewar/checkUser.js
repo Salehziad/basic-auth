@@ -15,20 +15,22 @@ module.exports=(Users)=>async (req,res,next)=>{
         let [username,password]=decode.split(':');
         console.log(username,password);
         console.log({Users});
-
-        // console.log(x);
-
         try{
             const user = await Users.findOne({ where: { username: username } });
-            console.log(user.password);
-            const valid=await bcrypt.compare(password,user.password);
-            console.log({valid});
-            if (valid==true) {
-                req.user=user
-            } else {
-                res.status(500).send("wrong username or password");
+            if (user){
+                console.log(user.password);
+                const valid=await bcrypt.compare(password,user.password);
+                console.log({valid});
+                if (valid==true) {
+                    req.user=user
+                } else {
+                    next("wrong password please try again");
+                }
+            }else{
+                next(`this user ${username} is not defined please sign up and sign in again`)
             }
-        }catch{next(`error`)}
+
+        }catch{next(`error in sigin in `)}
     }
     next();
 }
