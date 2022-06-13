@@ -4,6 +4,9 @@ const app=express();
 app.use(express.json());
 const signUp=require('./routes/signUp');
 const loginRoutes=require('./routes/login')
+app.get('/',(req,res)=>{
+    res.send('welcome to signup signin server')
+})
 app.use(signUp);
 app.use(loginRoutes);
 
