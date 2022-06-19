@@ -1,7 +1,7 @@
 # basic-auth
 
 # UML Diagram
-# ![UML](./src/uml06.PNG)
+# ![UML](./src/06.PNG)
 
 # [Heroku Link](https://saleh-basic-auth.herokuapp.com/)
 
